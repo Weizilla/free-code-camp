@@ -1,4 +1,6 @@
 # free-code-camp
+[![Build Status](https://travis-ci.org/Weizilla/free-code-camp.svg?branch=master)](https://travis-ci.org/Weizilla/free-code-camp)
+
 Workspace for various problems from [Free Code Camp](https://www.freecodecamp.com)
 
 # Install
