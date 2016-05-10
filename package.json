@@ -1,0 +1,19 @@
+{
+  "name": "free-code-camp",
+  "version": "1.0.0",
+  "description": "Workspace for various problems from [Free Code Camp](https://www.freecodecamp.com)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Weizilla/free-code-camp.git"
+  },
+  "author": "Wei Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Weizilla/free-code-camp/issues"
+  },
+  "homepage": "https://github.com/Weizilla/free-code-camp#readme"
+}
