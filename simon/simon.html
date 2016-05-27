@@ -16,20 +16,58 @@
     <body>
 
         <div class="jumbotron">
-            <div class="container">
+            <div class="container text-center">
                 <h1>Simon Game</h1>
                 <svg version="1.1"
                         baseProfile="full"
-                        width="300" height="200"
+                        width="600" height="600"
                         xmlns="http://www.w3.org/2000/svg">
 
-                    <rect width="100%" height="100%" fill="red"/>
+                    <defs>
+                        <clipPath id="greenClip">
+                            <rect x="0" y="0" width="280" height="280"></rect>
+                        </clipPath>
+                        <clipPath id="redClip">
+                            <rect x="320" y="0" width="280" height="280"></rect>
+                        </clipPath>
+                        <clipPath id="blueClip">
+                            <rect x="320" y="320" width="280" height="280"></rect>
+                        </clipPath>
+                        <clipPath id="yellowClip">
+                            <rect x="0" y="320" width="280" height="280"></rect>
+                        </clipPath>
+                    </defs>
 
-                    <circle id="svgTest" cx="150" cy="100" r="80" fill="green"/>
+                    <circle cx="300" cy="300" r="250" fill="black"></circle>
 
-                    <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG
-                    </text>
+                    <circle id="greenPad" class="btn" cx="300" cy="300" r="230" fill="#3CB371" clip-path="url(#greenClip)"></circle>
+                    <circle id="redPad" class="btn" cx="300" cy="300" r="230" fill="#8B0000" clip-path="url(#redClip)"></circle>
+                    <circle id="bluePad" class="btn" cx="300" cy="300" r="230" fill="#0000CD" clip-path="url(#blueClip)"></circle>
+                    <circle id="yellowPad" class="btn" cx="300" cy="300" r="230" fill="#DEB887" clip-path="url(#yellowClip)"></circle>
 
+                    <circle cx="300" cy="300" r="120" fill="black"></circle>
+                    <circle cx="300" cy="300" r="110" fill="white"></circle>
+
+                    <text x="300" y="260" text-anchor="middle" font-size="40">Simon</text>
+
+                    <rect x="204" y="290" width="60" height="40" fill="black" rx="5" ry="5"></rect>
+                    <text x="234" y="350" text-anchor="middle" font-size="14">COUNT</text>
+
+                    <circle cx="300" cy="320" r="12" fill="black"></circle>
+                    <circle id="startBtn" class="btn" cx="300" cy="320" r="10" fill="#C11B17"></circle>
+                    <text x="300" y="350" text-anchor="middle" font-size="14">START</text>
+
+                    <circle cx="360" cy="320" r="12" fill="black"></circle>
+                    <circle id="strictBtn" class="btn" cx="360" cy="320" r="10" fill="#FDD017"></circle>
+                    <circle cx="360" cy="294" r="6" fill="black"></circle>
+                    <circle id="strictLed" cx="360" cy="294" r="4" fill="black"></circle>
+                    <text x="360" y="350" text-anchor="middle" font-size="14">STRICT</text>
+
+                    <text x="278" y="396" text-anchor="end" font-size="12">OFF</text>
+                    <text x="340" y="396" text-anchor="end" font-size="12">ON</text>
+                    <rect x="280" y="380" rx="2" ry="2" width="40" height="20" fill="black"></rect>
+                    <rect id="offSwitch" class="btn" x="280" y="380" rx="2" ry="2" width="20" height="20" fill="green"></rect>
+                    <rect id="onSwitch" class="btn" x="300" y="380" rx="2" ry="2" width="20" height="20" fill="green"></rect>
                 </svg>
             </div>
         </div>
