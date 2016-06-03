@@ -11,6 +11,8 @@ $(document).ready(function () {
     ];
 
     var sequence = [];
+    var intervals = [];
+    var running = false;
 
     buttons.forEach(function(button) {
         $(button.id).mousedown(function() {
@@ -29,19 +31,57 @@ $(document).ready(function () {
         })
     });
 
-    function playSequence() {
-        sequence.forEach(function(buttonIndex, i) {
-            var id = buttons[buttonIndex].id;
-            setTimeout(function() {$(id).mousedown()}, i * 1000);
-            setTimeout(function() {$(id).mouseup()}, (i + 1) * 900);
-        });
+    $(".onOffBtn").click(function () {
+        running = ! running;
+        updateOnOffSwitch();
+        if (! running) {
+            intervals.forEach(function (id) {
+                clearInterval(id);
+                //TODO reset all pad button states
+            });
+        }
+    });
+    
+    //TODO what to do when start button is pressed and there's already a sequence
+    $("#startBtn").click(function() {
+        if (running) {
+            addSequence(); 
+        }
+    });
+
+    function playSequence(step) {
+        console.log("playing step", step);
+        var buttonIdx = sequence[step];
+        var button = buttons[buttonIdx];
+        $(button.id).mousedown();
+        intervals.push(setTimeout(function() {
+            $(button.id).mouseup();
+            if (step < (sequence.length - 1)) {
+                playSequence(step + 1);
+            } else {
+                console.log("done");
+                addSequence()
+            }
+        }, 1000));
     }
 
     function addSequence() {
         sequence.push(_.random(3));
-        setTimeout(playSequence, 1000);
+        updateCount();
+        intervals.push(setTimeout(function() {
+            playSequence(0);
+        }, 1000));
     }
 
-    addSequence();
+    function updateOnOffSwitch() {
+        $("#onSwitch").attr("fill", running ? "green" : "black");
+        $("#offSwitch").attr("fill", running ? "black" : "green");
+    }
+    
+    function updateCount() {
+        $("#count").text(sequence.length);
+    }
 
+    updateOnOffSwitch();
+    updateCount();
 });
