@@ -49,9 +49,8 @@ $(document).ready(function () {
         }
     });
 
-    //TODO what to do when start button is pressed and there's already a sequence
     $("#startBtn").click(function() {
-        if (running) {
+        if (running && sequence.length == 0) {
             addSequence();
         }
     });
