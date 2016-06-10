@@ -2,10 +2,10 @@
 
 $(document).ready(function () {
     var padButtons = [
-        {id: "#greenPad", down: "#00FF00", up: "#3CB371", index: 0, sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3")},
-        {id: "#redPad", down: "#FF0000", up: "#8B0000", index: 1, sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")},
-        {id: "#yellowPad", down: "#FFFF00", up: "#DEB887", index: 2, sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3")},
-        {id: "#bluePad", down: "#1589FF", up: "#0000CD", index: 3, sound: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")}
+        {id: "#greenPad", down: "#00FF00", up: "#3CB371", index: 0, sound: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"},
+        {id: "#redPad", down: "#FF0000", up: "#8B0000", index: 1, sound: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"},
+        {id: "#yellowPad", down: "#FFFF00", up: "#DEB887", index: 2, sound: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"},
+        {id: "#bluePad", down: "#1589FF", up: "#0000CD", index: 3, sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"}
     ];
 
     var otherButtons = [
@@ -23,12 +23,10 @@ $(document).ready(function () {
     padButtons.forEach(function(button) {
         $(button.id).mousedown(function() {
             $(this).attr("fill", button.down);
-            button.sound.pause();
-            button.sound.play();
+            new Audio(button.sound).play();
             return false;
         }).mouseup(function() {
             $(this).attr("fill", button.up);
-            button.sound.pause();
             return false;
         })
     });
@@ -63,7 +61,7 @@ $(document).ready(function () {
             if (userTimeoutInterval) {
                 clearTimeout(userTimeoutInterval);
             }
-            
+
             var id = "#" + $(this).attr("id");
             var buttonIdx = padButtons.find(function(button) {
                 return id === button.id;
@@ -137,7 +135,7 @@ $(document).ready(function () {
         });
         usersTurn = false;
         sequence = [];
-        userSequence = []; 
+        userSequence = [];
         updateCount();
     }
 
