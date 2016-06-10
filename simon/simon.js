@@ -16,6 +16,7 @@ $(document).ready(function () {
     var sequence = [];
     var intervals = [];
     var running = false;
+    var strict = false;
     var userTimeoutInterval;
     var userSequence = [];
     var usersTurn = false;
@@ -49,8 +50,16 @@ $(document).ready(function () {
         }
     });
 
+    $("#strictBtn").click(function() {
+        strict = ! strict;
+        updateStrictSwitch();
+    });
+
     $("#startBtn").click(function() {
-        if (running && sequence.length == 0) {
+        if (running) {
+            if (sequence.length > 0) {
+                reset();
+            }
             addSequence();
         }
     });
@@ -79,7 +88,9 @@ $(document).ready(function () {
             }
         }
         console.log("all good");
-        if (userSequence.length === sequence.length) {
+        if (userSequence.length == 20) {
+            win();
+        } else if (userSequence.length === sequence.length) {
             userSequence = [];
             addSequence();
         } else {
@@ -89,6 +100,8 @@ $(document).ready(function () {
 
     function playSequence(step) {
         console.log("playing step", step);
+        $("#count").text(sequence.length);
+        usersTurn = false;
         var buttonIdx = sequence[step];
         var button = padButtons[buttonIdx];
         $(button.id).mousedown();
@@ -105,7 +118,6 @@ $(document).ready(function () {
 
     function addSequence() {
         sequence.push(_.random(3));
-        updateCount();
         intervals.push(setTimeout(function() {
             playSequence(0);
         }, 1000));
@@ -123,11 +135,30 @@ $(document).ready(function () {
     }
 
     function gameOver() {
-        console.log("game over!");
-        padButtons.forEach(function(button) {
+        $("#count").text("!!");
+        padButtons.forEach(function (button) {
             new Audio(button.sound).play();
         });
+        if (strict) {
+            console.log("game over!");
+            intervals.push(setTimeout(function() {
+                reset();
+                addSequence();
+            }, 1000));
+        } else {
+            console.log("try again");
+            userSequence = [];
+            intervals.push(setTimeout(function() {playSequence(0)}, 2000));
+        }
+    }
+
+    function win() {
         reset();
+        padButtons.forEach(function (button) {
+            new Audio(button.sound).play();
+        });
+        $("#count").html("&#9786;");
+        intervals.push(setTimeout(addSequence, 3000));
     }
 
     function reset() {
@@ -140,7 +171,7 @@ $(document).ready(function () {
         usersTurn = false;
         sequence = [];
         userSequence = [];
-        updateCount();
+        $("#count").text("--");
     }
 
     function updateOnOffSwitch() {
@@ -148,12 +179,9 @@ $(document).ready(function () {
         $("#offSwitch").attr("fill", running ? "black" : "green");
     }
 
-    function updateCount() {
-        var count = sequence.length;
-        count = count > 0 ? count - 1 : 0;
-        $("#count").text(count);
+    function updateStrictSwitch() {
+        $("#strictLed").attr("fill", strict ? "red" : "black");
     }
 
     updateOnOffSwitch();
-    updateCount();
 });
