@@ -125,6 +125,9 @@ $(document).ready(function () {
 
     function gameOver() {
         console.log("game over!");
+        padButtons.forEach(function(button) {
+            new Audio(button.sound).play();
+        });
         reset();
     }
 
