@@ -5,7 +5,7 @@ $(document).ready(function () {
         {id: "#greenPad", down: "#00FF00", up: "#3CB371", index: 0, sound: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"},
         {id: "#redPad", down: "#FF0000", up: "#8B0000", index: 1, sound: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"},
         {id: "#yellowPad", down: "#FFFF00", up: "#DEB887", index: 2, sound: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"},
-        {id: "#bluePad", down: "#1589FF", up: "#0000CD", index: 3, sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"}
+        {id: "#bluePad", down: "#1589FF", up: "#21618C", index: 3, sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"}
     ];
 
     var otherButtons = [
@@ -131,7 +131,9 @@ $(document).ready(function () {
     function reset() {
         intervals.forEach(function(id) {
             clearInterval(id);
-            //TODO reset all pad button states
+        });
+        padButtons.forEach(function(button) {
+            $(button.id).mouseup();
         });
         usersTurn = false;
         sequence = [];
@@ -145,7 +147,9 @@ $(document).ready(function () {
     }
 
     function updateCount() {
-        $("#count").text(sequence.length);
+        var count = sequence.length;
+        count = count > 0 ? count - 1 : 0;
+        $("#count").text(count);
     }
 
     updateOnOffSwitch();
