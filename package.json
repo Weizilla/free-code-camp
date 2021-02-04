@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Weizilla/free-code-camp#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.0",
     "mocha": "^3.1.2"
   }
 }
